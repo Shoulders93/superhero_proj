@@ -1,6 +1,8 @@
 # from superhero_project import superheroes
+# from superhero_project import superheroes
+from superhero_project import superheroes
 from django.db.models.query_utils import select_related_descend
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Superhero
@@ -33,11 +35,17 @@ def create(request):
     else:
         return render(request, 'superheroes/create.html')
 
-def delete(request):
+def delete(request, hero_id_delete):
+    delete_hero = Superhero.objects.get(pk=hero_id_delete)
+    context = {
+        'delete_hero': delete_hero
+    }
     if request.method == "POST":
-        name = request.POST.get('name')
-        delete_hero = name
         delete_hero.delete()
-        return HttpResponseRedirect(reverse('superheroes.index'))
+        redirect: index.html
     else:
-        return render(request, 'superheroes/delete.html')
+        return render(request, 'superheroes/delete.html', context)
+    return render(request, 'superheroes/delete.html', context)
+    
+
+# def edit(request):

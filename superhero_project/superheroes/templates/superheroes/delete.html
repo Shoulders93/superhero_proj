@@ -7,8 +7,7 @@
     <title>Delete Your Hero</title>
 </head>
 <body>
-    <!-- method was a "post" but changed to "delete" -->
-    <form action="{% url 'superheroes:delete' %}" method="delete">
+    <form action="{% url 'superheroes:delete' delete_hero.id %}" method="POST">
         {% csrf_token %}
         Name: <input type ="text" name="name" id="name"><br />
         <input type="submit" value="Delete!">
