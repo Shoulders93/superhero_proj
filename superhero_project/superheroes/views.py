@@ -1,3 +1,4 @@
+# from superhero_project import superheroes
 from django.db.models.query_utils import select_related_descend
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -31,3 +32,12 @@ def create(request):
         return HttpResponseRedirect(reverse('superheroes:index'))
     else:
         return render(request, 'superheroes/create.html')
+
+def delete(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        delete_hero = name
+        delete_hero.delete()
+        return HttpResponseRedirect(reverse('superheroes.index'))
+    else:
+        return render(request, 'superheroes/delete.html')
